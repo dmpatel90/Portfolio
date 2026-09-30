@@ -192,12 +192,18 @@ export default function Home() {
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <SectionHead eyebrow="Projects" title="Things I've built and configured" />
             <div className="grid gap-5 md:grid-cols-2">
+<<<<<<< HEAD
               {projects.map((p) => (
                 <article key={p.title} className={`reveal spot glass flex flex-col gap-5 rounded-3xl p-5 sm:p-6 ${p.wide ? "md:col-span-2 md:grid md:grid-cols-2 md:items-center md:gap-8" : ""}`}>
+=======
+              {projects.map((p, i) => (
+                <article key={p.title} className={`reveal spot glass flex flex-col gap-5 rounded-3xl p-5 sm:p-6 ${i === 0 ? "md:col-span-2 md:grid md:grid-cols-2 md:items-center md:gap-8" : ""}`}>
+>>>>>>> e9a00cb57efdb257b473022f5a4f88408b23697c
                   <ProjectVisual type={p.visual} />
                   <div className="flex min-w-0 flex-col gap-3">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="font-mono text-[11px] uppercase tracking-wider text-cyan">{p.kind}</span>
+<<<<<<< HEAD
                       {p.badge && <span className="rounded-full bg-gradient-to-r from-cyan to-violet px-2 py-0.5 text-[10px] font-bold text-void">{p.badge}</span>}
                     </div>
                     <h3 className="text-2xl font-bold text-white">{p.title}</h3>
@@ -212,6 +218,12 @@ export default function Home() {
                         ))}
                       </div>
                     )}
+=======
+                      {i === 0 && <span className="rounded-full bg-gradient-to-r from-cyan to-violet px-2 py-0.5 text-[10px] font-bold text-void">FEATURED</span>}
+                    </div>
+                    <h3 className="text-2xl font-bold text-white">{p.title}</h3>
+                    <p className="leading-relaxed text-slate-400">{p.text}</p>
+>>>>>>> e9a00cb57efdb257b473022f5a4f88408b23697c
                     <div className="flex flex-wrap gap-1.5">{p.tags.map((t) => <Chip key={t}>{t}</Chip>)}</div>
                     {p.link && (
                       <a href={p.link} target="_blank" rel="noopener" className="mt-1 inline-flex w-fit items-center gap-1 text-sm font-semibold text-cyan hover:text-white">

@@ -149,6 +149,7 @@ export function Gauge({ name, level }) {
 /* ---------- Project visuals ---------- */
 export function ProjectVisual({ type }) {
   const frame = "relative h-44 overflow-hidden rounded-xl border border-white/10 bg-panel";
+<<<<<<< HEAD
   if (type === "gantt") {
     // Baseline schedule from the FoodShare Microsoft Project file (15 Jun – 4 Aug 2026).
     const rows = [
@@ -177,6 +178,8 @@ export function ProjectVisual({ type }) {
       </div>
     );
   }
+=======
+>>>>>>> e9a00cb57efdb257b473022f5a4f88408b23697c
   if (type === "browser")
     return (
       <div className={frame} aria-hidden="true">
