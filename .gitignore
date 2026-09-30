@@ -1,9 +1,4 @@
 node_modules
 .next
 .vercel
-<<<<<<< HEAD
-
-.vercel
 .env*
-=======
->>>>>>> e9a00cb57efdb257b473022f5a4f88408b23697c

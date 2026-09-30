@@ -100,7 +100,6 @@ section[id] { scroll-margin-top: 5rem; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .gauge-arc { stroke-dasharray: var(--len) 999; }
 }
-<<<<<<< HEAD
 
 /* ---------- Phone / touch performance ----------
    Same look, cheaper to draw. The cards keep their translucent glass colours;
@@ -116,5 +115,3 @@ section[id] { scroll-margin-top: 5rem; }
   .blob { filter: blur(60px); }
   .spot::before, .spot::after { display: none; }
 }
-=======
->>>>>>> e9a00cb57efdb257b473022f5a4f88408b23697c

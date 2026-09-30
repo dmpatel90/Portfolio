@@ -9,16 +9,11 @@ export function NetworkCanvas() {
     const canvas = ref.current;
     const ctx = canvas.getContext("2d");
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-<<<<<<< HEAD
     let w, h, dpr, nodes, raf, LINK = 130, visible = true, lastT = 0, small = false;
-=======
-    let w, h, dpr, nodes, raf;
->>>>>>> e9a00cb57efdb257b473022f5a4f88408b23697c
     const mouse = { x: -9999, y: -9999 };
     const COLORS = ["34,211,238", "99,102,241", "168,85,247"];
 
     const init = () => {
-<<<<<<< HEAD
       w = canvas.clientWidth; h = canvas.clientHeight;
       small = w < 768 || window.matchMedia("(hover: none)").matches;
       dpr = Math.min(window.devicePixelRatio || 1, small ? 1.5 : 2);
@@ -26,13 +21,6 @@ export function NetworkCanvas() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       const count = Math.round(Math.min(small ? 45 : 90, (w * h) / 14000));
       LINK = small ? 115 : 130;
-=======
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = canvas.clientWidth; h = canvas.clientHeight;
-      canvas.width = w * dpr; canvas.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const count = Math.round(Math.min(90, (w * h) / 14000));
->>>>>>> e9a00cb57efdb257b473022f5a4f88408b23697c
       nodes = Array.from({ length: count }, () => ({
         x: Math.random() * w, y: Math.random() * h,
         vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
@@ -40,7 +28,6 @@ export function NetworkCanvas() {
       }));
     };
 
-<<<<<<< HEAD
     const draw = (t = 0) => {
       // Skip work while the hero is off-screen or the tab is hidden.
       // Phones redraw at ~30fps, which looks the same for slow-drifting dots.
@@ -50,11 +37,6 @@ export function NetworkCanvas() {
       }
       lastT = t;
       ctx.clearRect(0, 0, w, h);
-=======
-    const draw = () => {
-      ctx.clearRect(0, 0, w, h);
-      const LINK = 130;
->>>>>>> e9a00cb57efdb257b473022f5a4f88408b23697c
       for (const n of nodes) {
         if (!reduce) { n.x += n.vx; n.y += n.vy; }
         if (n.x < 0 || n.x > w) n.vx *= -1;
@@ -89,7 +71,6 @@ export function NetworkCanvas() {
       mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
     };
     const onLeave = () => { mouse.x = mouse.y = -9999; };
-<<<<<<< HEAD
     // Phones fire "resize" when the address bar hides; only rebuild on width changes.
     let lastW = 0;
     const onResize = () => {
@@ -100,20 +81,12 @@ export function NetworkCanvas() {
     io.observe(canvas);
 
     lastW = canvas.clientWidth; init(); draw();
-=======
-    const onResize = () => { cancelAnimationFrame(raf); init(); draw(); };
-
-    init(); draw();
->>>>>>> e9a00cb57efdb257b473022f5a4f88408b23697c
     window.addEventListener("resize", onResize);
     window.addEventListener("pointermove", onMove);
     document.addEventListener("pointerleave", onLeave);
     return () => {
       cancelAnimationFrame(raf);
-<<<<<<< HEAD
       io.disconnect();
-=======
->>>>>>> e9a00cb57efdb257b473022f5a4f88408b23697c
       window.removeEventListener("resize", onResize);
       window.removeEventListener("pointermove", onMove);
       document.removeEventListener("pointerleave", onLeave);
