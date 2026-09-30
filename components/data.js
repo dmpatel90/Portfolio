@@ -104,17 +104,13 @@ export const projects = [
     title: "Pet Choice",
     kind: "Full-stack web app",
     visual: "browser",
-<<<<<<< HEAD
     wide: true,
     badge: "FEATURED",
-=======
->>>>>>> e9a00cb57efdb257b473022f5a4f88408b23697c
     text: "A cat-breed explorer built on The Cat API. Search, filter and sort breeds, view images and details, and manage entries with full CRUD. It uses Node.js and Express on the server, PostgreSQL through Sequelize, and responsive EJS and Bootstrap views.",
     tags: ["Node.js", "Express", "PostgreSQL", "Sequelize", "EJS", "Bootstrap"],
     link: "https://github.com/dmpatel90",
   },
   {
-<<<<<<< HEAD
     title: "FoodShare Food Bank Management System",
     kind: "Project management · Team of 7",
     visual: "gantt",
@@ -128,10 +124,9 @@ export const projects = [
       ["3", "warehouse hubs"],
     ],
     tags: ["Microsoft Project", "WBS & WBS Dictionary", "Project Charter", "Risk Management", "Stakeholder Management", "Cost Baseline"],
+    link: "https://github.com/dmpatel90/FoodBank-Share-Project",
   },
   {
-=======
->>>>>>> e9a00cb57efdb257b473022f5a4f88408b23697c
     title: "SAP ↔ EFRIS Integration",
     kind: "Enterprise integration",
     visual: "flow",
