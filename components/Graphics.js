@@ -231,13 +231,132 @@ export function ProjectVisual({ type }) {
   if (type === "terminal")
     return (
       <div className={`${frame} p-4 font-mono text-[11px] leading-relaxed`} aria-hidden="true">
-        <p><span className="text-emerald-400">vyos@edge</span><span className="text-slate-500">:~$</span> <span className="text-slate-200">show interfaces</span></p>
-        <p className="text-slate-500">eth0  10.10.0.1/24    u/u  LAN</p>
-        <p className="text-slate-500">eth1  192.168.56.2/24 u/u  WAN</p>
+        <p><span className="text-sky-300">S1#</span> <span className="text-slate-200">show vlan brief</span></p>
+        <p className="text-slate-500">10  Faculty/Staff   active  Fa0/11-17</p>
+        <p className="text-slate-500">30  Guest           active  Fa0/6-10</p>
+        <p className="text-slate-500">99  Management      active</p>
         <p className="mt-1"><span className="text-emerald-400">vyos@edge</span><span className="text-slate-500">:~$</span> <span className="text-slate-200">sudo nft list ruleset</span></p>
         <p className="text-cyan">chain input {"{"} policy drop;</p>
-        <p className="pl-3 text-slate-400">ct state established accept</p>
         <p className="pl-3 text-slate-400">tcp dport 22 accept <span className="caret" /></p>
+      </div>
+    );
+  if (type === "adlab") {
+    const node = (x, y, w, label, sub, color) => (
+      <g key={label}>
+        <rect x={x} y={y} width={w} height="30" rx="7" fill="#0f1526" stroke={color} />
+        <text x={x + w / 2} y={y + 13} textAnchor="middle" fontSize="9.5" fontWeight="700" fill="#e2e8f0">{label}</text>
+        <text x={x + w / 2} y={y + 24} textAnchor="middle" fontSize="7.5" fill="#94a3b8" fontFamily="JetBrains Mono, monospace">{sub}</text>
+      </g>
+    );
+    const ou = [["HQ", 0], ["Users", 1], ["Accountants", 2], ["IT", 2], ["Helpdesk", 3], ["SysAdmins", 3], ["Computers", 1], ["Laptops", 2]];
+    return (
+      <div className={`${frame} grid grid-cols-[1.35fr_1fr] gap-2 p-3`} aria-hidden="true">
+        <svg viewBox="0 0 220 136" className="h-full w-full max-w-full">
+          <path d="M110 32 V46 M38 46 H182 M38 46 V56 M110 46 V56 M182 46 V56 M110 86 V102" stroke="rgb(103 232 249 / .55)" fill="none" className="flow-line" />
+          {node(80, 2, 60, "Router VM", "NAT · gateway", "rgb(52 211 153 / .7)")}
+          {node(2, 56, 72, "srv1", "AD, DNS, DHCP", "rgb(34 211 238 / .7)")}
+          {node(74, 56, 72, "srv2", "File shares", "rgb(139 92 246 / .7)")}
+          {node(146, 56, 72, "srv3", "Domain member", "rgb(139 92 246 / .7)")}
+          {node(72, 102, 76, "laptop1", "M: and X: mapped", "rgb(251 191 36 / .7)")}
+        </svg>
+        <div className="flex flex-col justify-center rounded-lg border border-white/10 bg-white/[.03] px-2.5 py-2 font-mono text-[9.5px] leading-[1.35] text-slate-300">
+          <p className="mb-0.5 text-[8.5px] uppercase tracking-wider text-slate-500">AD Users & Computers</p>
+          {ou.map(([n, d]) => (
+            <p key={n} style={{ paddingLeft: d * 10 }} className={d === 0 ? "text-cyan" : ""}>
+              <span className="text-amber-300/80">▸</span> {n}
+            </p>
+          ))}
+        </div>
+      </div>
+    );
+  }
+  if (type === "phish")
+    return (
+      <div className={`${frame} flex flex-col justify-center gap-3 p-4`} aria-hidden="true">
+        <div className="flex items-center gap-2 rounded-md bg-white/5 px-2 py-1.5 font-mono text-[10px] text-slate-400">
+          <span className="text-rose-400">⚠</span> hxxps://roblox[.]com.•••••/games/private-server
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="relative grid h-20 w-20 shrink-0 place-items-center rounded-full border-4 border-rose-500/70 bg-rose-500/10">
+            <div className="text-center leading-none">
+              <p className="text-xl font-extrabold text-rose-300">21</p>
+              <p className="font-mono text-[9px] text-slate-400">/ 92</p>
+            </div>
+          </div>
+          <div className="grid gap-1.5 text-[11px]">
+            <span className="w-fit rounded-full border border-rose-400/50 bg-rose-500/15 px-2 py-0.5 font-semibold text-rose-200">Verdict: Phishing</span>
+            <p className="text-slate-300">Brand: <span className="text-white">Roblox</span></p>
+            <p className="text-slate-300">Domain age: <span className="text-white">~7 months</span></p>
+            <p className="text-slate-300">Analysed in: <span className="text-white">Windows Sandbox</span></p>
+          </div>
+        </div>
+      </div>
+    );
+  if (type === "itil") {
+    const steps = ["Plan", "Improve", "Engage", "Design & transition", "Obtain / build", "Deliver & support"];
+    return (
+      <div className={`${frame} grid place-items-center p-3`} aria-hidden="true">
+        <svg viewBox="0 0 260 150" className="h-full w-full max-w-full">
+          <circle cx="130" cy="75" r="46" fill="none" stroke="rgb(255 255 255 / .08)" strokeWidth="10" />
+          <circle cx="130" cy="75" r="46" fill="none" stroke="url(#itg)" strokeWidth="3" strokeDasharray="8 10" className="flow-line" />
+          <defs><linearGradient id="itg" x1="0" x2="1"><stop offset="0" stopColor="#22d3ee" /><stop offset="1" stopColor="#a855f7" /></linearGradient></defs>
+          <text x="130" y="72" textAnchor="middle" fontSize="10" fontWeight="700" fill="#e2e8f0">Service</text>
+          <text x="130" y="85" textAnchor="middle" fontSize="10" fontWeight="700" fill="#e2e8f0">value chain</text>
+          {steps.map((t, i) => {
+            const ang = (i / steps.length) * Math.PI * 2 - Math.PI / 2;
+            const cx = 130 + Math.cos(ang) * 46, cy = 75 + Math.sin(ang) * 46;
+            const lx = 130 + Math.cos(ang) * 58, ly = 75 + Math.sin(ang) * 58;
+            const anchor = Math.abs(Math.cos(ang)) < 0.2 ? "middle" : Math.cos(ang) > 0 ? "start" : "end";
+            const dy = Math.sin(ang) < -0.9 ? -2 : Math.sin(ang) > 0.9 ? 9 : 3;
+            return (
+              <g key={t}>
+                <circle cx={cx} cy={cy} r="3.5" fill="#22d3ee" />
+                <text x={lx} y={ly + dy} textAnchor={anchor} fontSize="8.5" fill="#cbd5e1" fontFamily="JetBrains Mono, monospace">{t}</text>
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+    );
+  }
+  if (type === "ticket")
+    return (
+      <div className={`${frame} p-3.5 font-mono text-[10px] leading-relaxed`} aria-hidden="true">
+        <div className="mb-1.5 flex flex-wrap items-center gap-1.5">
+          <span className="rounded bg-rose-500/20 px-1.5 py-0.5 text-rose-200">Bug</span>
+          <span className="rounded bg-amber-400/20 px-1.5 py-0.5 text-amber-200">High</span>
+          <span className="rounded bg-mint/20 px-1.5 py-0.5 text-mint">Fixed → Retest</span>
+        </div>
+        <p className="font-sans text-[11px] font-semibold text-white">HTTP 500 on Contact form when Name has an apostrophe</p>
+        <p className="mt-1.5 text-slate-500">Environment</p>
+        <p className="text-slate-300">Chrome · Windows 11 · Staging</p>
+        <p className="mt-1 text-slate-500">Steps</p>
+        <p className="text-slate-300">1. Open /contact  2. Name: Sean O'Brien  3. Submit</p>
+        <p className="mt-1 text-slate-300"><span className="text-slate-500">Expected</span> confirmation · <span className="text-slate-500">Actual</span> <span className="text-rose-300">500 error</span></p>
+      </div>
+    );
+  if (type === "azuremap")
+    return (
+      <div className={`${frame} grid place-items-center p-3`} aria-hidden="true">
+        <svg viewBox="0 0 300 150" className="h-full w-full max-w-full">
+          <rect x="8" y="58" width="62" height="34" rx="8" fill="#0f1526" stroke="rgb(251 191 36 / .7)" />
+          <text x="39" y="73" textAnchor="middle" fontSize="10" fontWeight="700" fill="#e2e8f0">Toronto</text>
+          <text x="39" y="85" textAnchor="middle" fontSize="7.5" fill="#94a3b8" fontFamily="JetBrains Mono, monospace">user</text>
+          <rect x="92" y="56" width="98" height="38" rx="8" fill="#0f1526" stroke="rgb(34 211 238 / .8)" />
+          <text x="141" y="72" textAnchor="middle" fontSize="10" fontWeight="700" fill="#e2e8f0">Traffic Manager</text>
+          <text x="141" y="85" textAnchor="middle" fontSize="7.5" fill="#94a3b8" fontFamily="JetBrains Mono, monospace">performance routing</text>
+          <path d="M70 75 H92" stroke="#67e8f9" className="flow-line" fill="none" strokeWidth="1.5" />
+          <path d="M190 68 C200 68 200 36 208 36" stroke="#67e8f9" className="flow-line" fill="none" strokeWidth="1.5" />
+          <path d="M190 82 C200 82 200 114 208 114" stroke="#c084fc" className="flow-line" fill="none" strokeWidth="1.5" strokeDasharray="3 5" />
+          <rect x="208" y="14" width="88" height="44" rx="8" fill="rgb(52 211 153 / .08)" stroke="rgb(52 211 153 / .7)" />
+          <text x="252" y="30" textAnchor="middle" fontSize="9.5" fontWeight="700" fill="#e2e8f0">Canada East</text>
+          <text x="252" y="42" textAnchor="middle" fontSize="7.5" fill="#94a3b8" fontFamily="JetBrains Mono, monospace">LB + 2 IIS VMs</text>
+          <text x="252" y="52" textAnchor="middle" fontSize="7.5" fill="#6ee7b7" fontFamily="JetBrains Mono, monospace">primary</text>
+          <rect x="208" y="92" width="88" height="44" rx="8" fill="#0f1526" stroke="rgb(139 92 246 / .7)" />
+          <text x="252" y="108" textAnchor="middle" fontSize="9.5" fontWeight="700" fill="#e2e8f0">Central India</text>
+          <text x="252" y="120" textAnchor="middle" fontSize="7.5" fill="#94a3b8" fontFamily="JetBrains Mono, monospace">LB + 2 IIS VMs</text>
+          <text x="252" y="130" textAnchor="middle" fontSize="7.5" fill="#c4b5fd" fontFamily="JetBrains Mono, monospace">failover ~30 s</text>
+        </svg>
       </div>
     );
   return (

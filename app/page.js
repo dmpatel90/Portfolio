@@ -213,10 +213,19 @@ export default function Home() {
                       </div>
                     )}
                     <div className="flex flex-wrap gap-1.5">{p.tags.map((t) => <Chip key={t}>{t}</Chip>)}</div>
-                    {p.link && (
-                      <a href={p.link} target="_blank" rel="noopener" className="mt-1 inline-flex w-fit items-center gap-1 text-sm font-semibold text-cyan hover:text-white">
-                        View on GitHub <span aria-hidden="true">↗</span>
-                      </a>
+                    {(p.demo || p.link) && (
+                      <div className="mt-1 flex flex-wrap gap-x-5 gap-y-1">
+                        {p.demo && (
+                          <a href={p.demo} target="_blank" rel="noopener" className="inline-flex w-fit items-center gap-1 text-sm font-semibold text-cyan hover:text-white">
+                            Live demo <span aria-hidden="true">↗</span>
+                          </a>
+                        )}
+                        {p.link && (
+                          <a href={p.link} target="_blank" rel="noopener" className="inline-flex w-fit items-center gap-1 text-sm font-semibold text-cyan hover:text-white">
+                            View on GitHub <span aria-hidden="true">↗</span>
+                          </a>
+                        )}
+                      </div>
                     )}
                   </div>
                 </article>
